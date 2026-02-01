@@ -1,0 +1,50 @@
+<div class="bg-white/70 shadow-sm border-b border-gray-200 h-[10dvh] my-auto">
+  <div class="max-w-full mx-auto flex items-center justify-between px-8 py-1">
+    <!-- Logo -->
+    <div
+      class="text-xl font-semibold text-blue-600 cursor-pointer select-none flex justify-center items-center gap-2"
+      routerLink="/"
+    >
+      <img
+        src="/logo.png"
+        alt="Home Inventory Logo"
+        class="w-12 h-auto"
+        draggable="false"
+        (contextmenu)="onRightClick()"
+      />
+      <p class="text-black text-2xl font-bold">ExpiryElf</p>
+    </div>
+    <div>
+      @if(currentUrl() !== '/login' && currentUrl() !== '/signup' && !loggedIn()){<a
+        routerLink="/login"
+        class="ml-4 text-white bg-blue-600 hover:bg-blue-700 font-medium px-4 py-2 rounded-md transition-colors"
+        >Login</a
+      >
+      } @if(loggedIn()){
+      <div (clickOutside)="userMenuOpen() && toggleUserMenu()">
+        <div
+          (click)="toggleUserMenu()"
+          class="flex items-center gap-2 cursor-pointer px-3 py-2 rounded-md relative"
+        >
+          <lucide-angular [img]="UserIcon" />
+        </div>
+        @if(userMenuOpen()){
+        <div
+          class="absolute right-8 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50"
+        >
+          <a routerLink="/app/profile" class="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+            >Profile
+          </a>
+          <button
+            class="w-full text-left block px-4 py-2 text-gray-800 hover:bg-gray-100"
+            (click)="logOut()"
+          >
+            Logout
+          </button>
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</div>

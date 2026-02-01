@@ -1,0 +1,129 @@
+<section class="min-h-screen flex flex-col bg-linear-to-b from-blue-50 to-white">
+  <!-- Hero Section -->
+  <div class="flex flex-col md:flex-row items-center justify-between px-8 md:px-16 py-20">
+    <!-- Left Content -->
+    <div class="max-w-lg text-center md:text-left space-y-6">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 leading-tight">
+        Keep your food <span class="text-blue-600">fresh</span> and never miss an expiry again!
+      </h1>
+      <p class="text-gray-600 text-lg">
+        ExpiryElf helps you track your groceries, medicines, and pantry items — smartly reminding
+        you before they expire. Save food, money, and time 🍎⏰
+      </p>
+      <div class="flex justify-center md:justify-start gap-4">
+        <a
+          routerLink="/signup"
+          class="px-6 py-3 bg-blue-600 text-white rounded-xl shadow-md hover:bg-blue-700 transition"
+          >Get Started</a
+        >
+        <a
+          routerLink="/login"
+          class="px-6 py-3 border border-blue-600 text-blue-600 rounded-xl hover:bg-blue-50 transition"
+          >Login</a
+        >
+      </div>
+    </div>
+
+    <!-- Right Illustration -->
+    <div class="mt-12 md:mt-0">
+      <img
+        src="/images/illustration.png"
+        alt="ExpiryElf illustration"
+        class="w-full max-w-md mx-auto"
+        draggable="false"
+        (contextmenu)="$event.preventDefault()"
+      />
+    </div>
+  </div>
+
+ <!-- 🧠 Features -->
+  <section id="features" class="bg-white py-16 px-8 md:px-16 text-center">
+    <h2 class="text-3xl font-semibold text-gray-800 mb-10">Why ExpiryElf?</h2>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="p-6 border rounded-xl hover:shadow-md transition">
+        <div class="text-4xl mb-4">🔔</div>
+        <h3 class="text-xl font-semibold mb-2">Smart Reminders</h3>
+        <p class="text-gray-600">Get alerts before food expires so you never waste a meal again.</p>
+      </div>
+      <div class="p-6 border rounded-xl hover:shadow-md transition">
+        <div class="text-4xl mb-4">📱</div>
+        <h3 class="text-xl font-semibold mb-2">Access Anywhere</h3>
+        <p class="text-gray-600">Track your items seamlessly on mobile, tablet, or desktop.</p>
+      </div>
+      <div class="p-6 border rounded-xl hover:shadow-md transition">
+        <div class="text-4xl mb-4">🌍</div>
+        <h3 class="text-xl font-semibold mb-2">Eco-Friendly</h3>
+        <p class="text-gray-600">Reduce waste and make sustainable choices effortlessly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⚙️ How It Works -->
+  <section id="how-it-works" class="bg-blue-50 py-20 px-8 md:px-16">
+    <h2 class="text-3xl font-semibold text-center text-gray-800 mb-12">How ExpiryElf Works</h2>
+
+    <div class="grid md:grid-cols-3 gap-12 items-start text-center">
+      <div class="space-y-4">
+        <div class="text-5xl text-blue-600">📦</div>
+        <h3 class="text-xl font-semibold">1. Add Your Items</h3>
+        <p class="text-gray-600">Quickly add groceries or medicines with name, category, and expiry date.</p>
+      </div>
+      <div class="space-y-4">
+        <div class="text-5xl text-blue-600">🧮</div>
+        <h3 class="text-xl font-semibold">2. Let the Elf Work</h3>
+        <p class="text-gray-600">ExpiryElf tracks all your items and calculates reminders automatically.</p>
+      </div>
+      <div class="space-y-4">
+        <div class="text-5xl text-blue-600">🔔</div>
+        <h3 class="text-xl font-semibold">3. Get Smart Alerts</h3>
+        <p class="text-gray-600">Receive friendly alerts before your food or medicine expires.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 💬 Testimonials -->
+  <section id="testimonials" class="py-20 px-8 md:px-16 bg-white text-center">
+    <h2 class="text-3xl font-semibold text-gray-800 mb-12">What Our Users Say</h2>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="p-6 border rounded-xl shadow-sm">
+        <p class="text-gray-600 italic mb-4">
+          “ExpiryElf saved me from wasting so much food — it’s like having a tiny kitchen assistant!”
+        </p>
+        <h3 class="font-semibold text-blue-600">– Ananya, Mumbai</h3>
+      </div>
+      <div class="p-6 border rounded-xl shadow-sm">
+        <p class="text-gray-600 italic mb-4">
+          “I love how simple it is! I track groceries and medicines in one place now.”
+        </p>
+        <h3 class="font-semibold text-blue-600">– Rahul, Delhi</h3>
+      </div>
+      <div class="p-6 border rounded-xl shadow-sm">
+        <p class="text-gray-600 italic mb-4">
+          “Clean design, smart reminders, and a cute elf mascot. What else do you need?”
+        </p>
+        <h3 class="font-semibold text-blue-600">– Priya, Bengaluru</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🚀 CTA -->
+  <section class="bg-blue-600 py-16 text-center text-white">
+    <h2 class="text-3xl font-bold mb-4">Ready to keep your kitchen fresh?</h2>
+    <p class="text-lg mb-8">Join thousands of users who trust ExpiryElf to track what matters most.</p>
+    <a routerLink="/signup"
+       class="px-8 py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-blue-50 transition">
+      Get Started — It’s Free
+    </a>
+  </section>
+
+  <!-- ⚓ Footer -->
+  <footer class="py-6 bg-gray-900 text-gray-300 text-center text-sm">
+    <p>© 2025 ExpiryElf — The smart elf that saves your snacks 🧝‍♂️</p>
+    <p class="mt-2">
+      Built with ❤️ by
+      <a href="https://github.com/benazeem" target="_blank" class="underline hover:text-white">Mohd Azeem Malik</a>
+    </p>
+  </footer>
+</section>

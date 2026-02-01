@@ -1,0 +1,63 @@
+<div class="flex flex-col items-center justify-center bg-gray-700/30 relative w-screen h-[90dvh]">
+  <div class="max-w-md bg-white/70 backdrop-blur-md p-6 rounded-2xl shadow-lg">
+    @if(otpSent()){<button class="absolute top-2 left-3" (click)="handleBack()">
+      <lucide-angular [img]="LeftArrow" class="w-4 h-4 text-gray-800" /></button
+    >}
+    <div>
+      <h1 class="text-2xl font-semibold text-center text-gray-800 mb-6">Login</h1>
+      <img src="/images/profile.png" alt="" class="w-20 h-20 mx-auto mb-4 rounded-full" />
+    </div>
+    <!-- Form -->
+    <div class="mb-6">
+      @if (loginMethod() === 'email') { @if(loggingIn()===false){
+      <app-emailform mode="login"></app-emailform>} @else {
+      <div class="flex flex-col items-center justify-center py-4">
+        <lucide-angular [img]="Loader2" class="w-16 h-16 text-blue-600 animate-spin" />
+        <p class="mt-4 text-gray-600 text-lg">Logging you in...</p>
+      </div>
+      } } @if(loginMethod() === 'mobile') {
+      <!-- Mobile Login -->
+      <app-mobileform (otpSend)="otpSent.set($event)" [otpMode]="otpSent"></app-mobileform>}
+    </div>
+
+    <!-- Switch / Google Buttons -->
+    @if(!otpSent()){
+    <div class="flex justify-center space-x-4 mb-4">
+      @if (loginMethod() === 'mobile') {
+      <button
+        type="button"
+        class="flex items-center gap-3 p-3 rounded-full text-white bg-green-400 hover:bg-green-600 transition ease-in-out"
+        title="Email Login"
+        (click)="onSelectMethod('email')"
+      >
+        <lucide-angular [img]="Mail" class="my-icon"></lucide-angular>
+      </button>
+      } @else {
+      <button
+        type="button"
+        class="flex items-center gap-3 p-3 rounded-full text-white bg-blue-400 hover:bg-blue-600 transition ease-in-out"
+        title="Mobile Login"
+        (click)="onSelectMethod('mobile')"
+      >
+        <lucide-angular [img]="Phone" class="my-icon"></lucide-angular>
+      </button>
+      }
+
+      <button
+        type="button"
+        class="flex items-center gap-3 p-3 rounded-full bg-white hover:bg-gray-300 transition ease-in-out"
+        title="Google Sign-In"
+        (click)="onGoogleSignin()"
+      >
+        <img src="/icons/google.webp" width="24" height="24" alt="Google" />
+      </button>
+    </div>
+    <div class="mt-4 text-center">
+      <p>
+        Don't have an account?
+        <a routerLink="/signup" class="text-blue-600 hover:underline">Sign up</a>
+      </p>
+    </div>
+    }
+  </div>
+</div>
