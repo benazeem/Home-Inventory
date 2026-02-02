@@ -1,0 +1,84 @@
+<div class="p-6 w-full flex flex-col gap-6">
+
+  <!-- HEADER -->
+  <div>
+    <h1 class="text-3xl font-bold mb-1">📦 Inventory</h1>
+    <p class="text-gray-600">Track all your items and expiry dates.</p>
+  </div>
+
+  <!-- CONTROLS -->
+  <div
+    class="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between bg-white p-4 rounded-xl shadow border"
+  >
+    <input
+      type="text"
+      placeholder="Search items..."
+      class="w-full lg:w-64 px-4 py-2 border rounded-lg shadow-sm focus:ring focus:ring-blue-200"
+      (input)="search.set($any($event.target).value)"
+    />
+
+    <div class="flex gap-3">
+      <select
+        class="px-4 py-2 border rounded-lg shadow-sm"
+        (change)="category.set($any($event.target).value)"
+      >
+        @for (cat of categories; track cat) {
+          <option [value]="cat">{{ cat }}</option>
+        }
+      </select>
+
+      <select
+        class="px-4 py-2 border rounded-lg shadow-sm"
+        (change)="sortBy.set($any($event.target).value)"
+      >
+        <option value="expiry">Sort by Expiry</option>
+        <option value="name">Sort by Name</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- INVENTORY GRID -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+    @for (item of filtered(); track item.name) {
+    <div
+      class="bg-white p-5 rounded-2xl shadow border flex flex-col gap-3 hover:shadow-lg transition"
+    >
+      <div class="flex justify-between items-start">
+        <h2 class="text-lg font-semibold">{{ item.name }}</h2>
+        <span
+          class="text-xs px-2 py-1 rounded-md bg-blue-100 text-blue-600"
+          >{{ item.category }}</span
+        >
+      </div>
+
+      <div class="text-sm text-gray-600">
+        Quantity: <span class="font-semibold">{{ item.quantity }}</span>
+      </div>
+
+      <div>
+        <p class="text-sm text-gray-600">Expires on:</p>
+        <p class="text-md font-semibold">
+          {{ item.expires | date : "mediumDate" }}
+        </p>
+      </div>
+
+      <!-- Status Badge -->
+      <div class="mt-auto">x
+        @if (isExpired(item)) {
+        <span class="text-xs px-2 py-1 rounded-md bg-red-100 text-red-600"
+          >Expired</span
+        >
+        } @else {
+        <span class="text-xs px-2 py-1 rounded-md bg-green-100 text-green-600"
+          >Fresh</span
+        >
+        }
+      </div>
+    </div>
+    }
+  </div>
+
+  @if (!filtered().length) {
+  <p class="text-center text-gray-500 mt-10">No items found.</p>
+  }
+</div>

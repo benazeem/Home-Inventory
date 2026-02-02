@@ -1,0 +1,273 @@
+<div class="mx-auto mt-4">
+  <div class="flex items-center justify-between px-3 py-1 bg-white rounded shadow">
+    <h1 class="text-3xl font-semibold">Add Inventory Item</h1>
+    <div class="flex items-center gap-2">
+      <button class="bg-blue-500 w-12 h-12 p-3 rounded-full" (click)="toggleUploadArea()">
+        <lucide-angular [img]="Upload" class="w-6 h-6 text-white"></lucide-angular>
+      </button>
+      <button class="bg-blue-500 w-12 h-12 p-3 rounded-full">
+        <lucide-angular [img]="Scanner" class="w-6 h-6 text-white"></lucide-angular>
+      </button>
+    </div>
+  </div>
+
+  <!-- Manual form -->
+  <form
+    (ngSubmit)="addManual()"
+    [formGroup]="form"
+    class="space-y-4 bg-white py-4 px-2 rounded shadow"
+  >
+    <div class="flex flex-col gap-2">
+      <div>
+        <div
+          (click)="toggelFormSection(1)"
+          class="text-2xl font-semibold bg-blue-400 p-1 w-full rounded flex justify-between items-center"
+          [class.cursor-pointer]="visibleSection !== 1"
+        >
+          <p>Basic Details</p>
+          <lucide-angular [img]="visibleSection === 1 ? ChevronUp : ChevronDown"></lucide-angular>
+        </div>
+        @if(visibleSection===1){
+        <div class="flex flex-wrap gap-2 p-2">
+          <div title="Item Name" class="w-xs">
+            <label for="item-name" class="block text-sm max-w-max">Name</label>
+            <input id="item-name" type="text" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Category" class="w-xs">
+            <label for="item-category" class="block text-sm max-w-max">Category</label>
+            <input id="item-category" type="text" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Sub-Category" class="w-xs">
+            <label for="item-sub-category" class="block text-sm max-w-max">Sub-Category</label>
+            <input id="item-sub-category" type="text" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Quantity" class="w-xs">
+            <label for="item-quantity" class="block text-sm max-w-max">Quantity</label>
+            <input id="item-quantity" type="text" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Price" class="w-xs">
+            <label class="block text-sm loda" for="item-price">Price </label>
+            <div class="flex items-center rounded border w-full focus-within:outline">
+              <lib-country-list
+                class="text-black"
+                selectedCountryCode="IN"
+                [selectedCountryConfig]="{
+                  hideName: true,
+                  hideCode: true,
+                  displayCurrencySymbol: true,
+                  hideFlag: true,
+                  hideDialCode: true
+                }"
+                [countryListConfig]="{
+                  hideName: true,
+                  hideCode: true,
+                  displayCurrencyCode: true,
+                  displayCurrencySymbol: true,
+                  hideFlag: false,
+                  hideDialCode: true
+                }"
+              ></lib-country-list>
+              <input
+                id="item-price"
+                type="number"
+                min="0"
+                formControlName="price"
+                class="w-full p-2 outline-none"
+              />
+            </div>
+          </div>
+          <div title="Item Tags" class="w-xs">
+            <label for="item-tags" class="block text-sm max-w-max">Tags</label>
+            <input id="item-tags" type="text" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Barcode" class="w-xs">
+            <label for="item-barcode" class="block text-sm max-w-max">Barcode</label>
+            <input id="item-barcode" type="text" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Image" class="w-xs">
+            <label for="item-image" class="block text-sm max-w-max">Image</label>
+            <input id="item-image" type="text" class="w-full p-2 border rounded" />
+          </div>
+        </div>
+        }
+      </div>
+      <div>
+        <div
+          (click)="toggelFormSection(2)"
+          class="text-2xl font-semibold bg-blue-400 p-1 w-full rounded flex justify-between items-center"
+          [class.cursor-pointer]="visibleSection !== 2"
+        >
+          <p>Expiry & Date Details</p>
+          <lucide-angular [img]="visibleSection === 2 ? ChevronUp : ChevronDown"></lucide-angular>
+        </div>
+        @if(visibleSection===2){
+        <div class="flex flex-col gap-2">
+          <div title="Item Expiry Date">
+            <label for="item-expiry-date" class="block text-sm max-w-max">Expiry Date</label>
+            <input id="item-expiry-date" type="date" class="w-full p-2 border rounded" />
+            <!--No-expiry toggle-->
+          </div>
+          <div title="Item Manufacturing Date">
+            <label for="item-manufacturing-date" class="block text-sm max-w-max"
+              >Manufacturing Date</label
+            >
+            <input id="item-manufacturing-date" type="date" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Shelf Life">
+            <label for="item-shelf-life" class="block text-sm max-w-max">Shelf Life</label>
+            <input id="item-shelf-life" type="text" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Reminder Days Before Expiry">
+            <label for="item-expiry-reminder" class="block text-sm max-w-max"
+              >Reminder Days Before Expiry</label
+            >
+            <input id="item-expiry-reminder" type="text" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Expiry Status">
+            <label for="item-expiry-status" class="block text-sm max-w-max">Expiry Status</label>
+            <input id="item-expiry-status" type="text" class="w-full p-2 border rounded" />
+            <!--Derived-->
+          </div>
+        </div>
+        }
+      </div>
+      <div>
+        <div
+          (click)="toggelFormSection(3)"
+          class="text-2xl font-semibold bg-blue-400 p-1 w-full rounded flex justify-between items-center"
+          [class.cursor-pointer]="visibleSection !== 3"
+        >
+          <p>Storage & Location</p>
+          <lucide-angular [img]="visibleSection === 3 ? ChevronUp : ChevronDown"></lucide-angular>
+        </div>
+        @if(visibleSection===3){
+        <div>
+          <div title="Item Storage Location">
+            <label for="item-storage-location" class="block text-sm max-w-max"
+              >Storage Location</label
+            >
+            <input id="item-storage-location" type="text" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Shelf / Box / Container">
+            <label for="item-shelf-location" class="block text-sm max-w-max"
+              >Shelf / Box / Container</label
+            >
+            <input id="item-shelf-location" type="text" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Storage Temperature">
+            <label for="item-storage-temperature" class="block text-sm max-w-max"
+              >Storage Temperature</label
+            >
+            <input id="item-storage-temperature" type="text" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Purchase Source">
+            <label for="item-purchase-source" class="block text-sm max-w-max"
+              >Purchase Source</label
+            >
+            <input id="item-purchase-source" type="text" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Purchase Date">
+            <label for="item-purchase-date" class="block text-sm max-w-max">Purchase Date</label>
+            <input id="item-purchase-date" type="text" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Batch Number">
+            <label for="item-batch-number" class="block text-sm max-w-max">Batch Number</label>
+            <input id="item-batch-number" type="text" class="w-full p-2 border rounded" />
+          </div>
+        </div>
+        }
+      </div>
+      <div>
+        <div
+          (click)="toggelFormSection(4)"
+          class="text-2xl font-semibold bg-blue-400 p-1 w-full rounded flex justify-between items-center"
+          [class.cursor-pointer]="visibleSection !== 4"
+        >
+          <p>Advanced</p>
+          <lucide-angular [img]="visibleSection === 4 ? ChevronUp : ChevronDown"></lucide-angular>
+        </div>
+        @if(visibleSection===4){
+        <div>
+          <div title="Item Serial Number / IMEI">
+            <label for="item-serial-number" class="block text-sm max-w-max"
+              >Serial Number / IMEI</label
+            >
+            <input id="item-serial-number" type="text" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Warranty Expiry Date">
+            <label for="item-warranty-expiry" class="block text-sm max-w-max"
+              >Warranty Expiry Date</label
+            >
+            <input id="item-warranty-expiry" type="date" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Upload Bill/Invoice">
+            <label for="item-upload-bill" class="block text-sm max-w-max"
+              >Upload Bill/Invoice</label
+            >
+            <input id="item-upload-bill" type="file" class="w-full p-2 border rounded" />
+          </div>
+          <div title="Item Additional Notes">
+            <label for="item-additional-notes" class="block text-sm max-w-max"
+              >Additional Notes</label
+            >
+            <input id="item-additional-notes" type="textarea" class="w-full p-2 border rounded" />
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if(uploadAreaVisible){
+  <div
+    class="w-full h-full bg-transparent backdrop-blur-2xl backdrop-opacity-50 backdrop-contrast-50 absolute top-0 left-0 flex justify-center items-center"
+  >
+    <div
+      (clickOutside)="toggleUploadArea()"
+      class="max-w-[90%] max-h-[80%] mt-4 relative bg-white p-12 rounded-lg shadow-lg flex flex-col items-center"
+    >
+      <h2 class="text-2xl font-semibold">Upload CSV File</h2>
+      <button
+        type="button"
+        title="Toggle Upload Area Visibility"
+        class="absolute top-1.5 right-1.5 p-1 rounded-full bg-red-500 hover:bg-rde-600 cursor-pointer"
+        (click)="toggleUploadArea()"
+      >
+        <lucide-angular [img]="Close" class="w-4 h-4 text-white"></lucide-angular>
+      </button>
+      <div class="my-2 flex justify-evenly items-center gap-1">
+        <div class="bg-gray-300 p-2 rounded-md flex justify-center items-center gap-2">
+          <div class="bg-blue-600 text-white p-2 rounded-full">
+            <label>
+              <lucide-angular [img]="Upload" class="w-4 h-4 text-white"></lucide-angular>
+              <input
+                type="file"
+                (change)="onBulkFileSelected($event)"
+                accept=".csv"
+                class="hidden"
+              />
+            </label>
+          </div>
+          <p>{{ selectedFileName ? selectedFileName : 'Upload a File' }}</p>
+        </div>
+        <button
+          class="p-2 bg-green-400 rounded-full disabled:bg-gray-400"
+          [disabled]="!selectedFileName"
+          (click)="handleCsvFile()"
+        >
+          @if(processingCSVFile){
+          <lucide-angular [img]="Loading" class="w-4 h-4 text-white animate-spin"></lucide-angular>}
+          @else{ <lucide-angular [img]="Check" class="w-4 h-4 text-white"></lucide-angular>}
+        </button>
+      </div>
+      <div class="max-h-[70%] w-full overflow-auto">
+        @for (item of parsedData; track $index) {
+        <div>
+          <p>{{ item.name }}</p>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  }
+</div>

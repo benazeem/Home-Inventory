@@ -1,0 +1,21 @@
+.ipv_selected-item {
+  background-color: transparent;
+  border: none;
+  padding: 0 5px;
+  outline: none;
+}
+.ipv_country-list {
+  min-width: 300px;
+  overflow-x: hidden;
+}
+
+.ipv_dropdown {
+  outline: none;
+  border-right: 1px solid #d1d5dc;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.ipv_dropdown:focus {
+  border-color: #60a5fa; /* Tailwind's blue-400 */
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.5); /* Tailwind's blue-400 with opacity */
+}
